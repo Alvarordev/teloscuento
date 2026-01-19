@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Star, Wifi, Car, Tv, Coffee, Shield } from "lucide-react";
+import { Star, Wifi } from "lucide-react";
+import { servicioIcons } from "@/lib/servicio-icons";
 
 export interface Accommodation {
   id: string;
@@ -18,14 +19,6 @@ export interface Accommodation {
 interface AccommodationCardProps {
   accommodation: Accommodation;
 }
-
-const iconMap: Record<string, React.ElementType> = {
-  wifi: Wifi,
-  car: Car,
-  tv: Tv,
-  coffee: Coffee,
-  shield: Shield,
-};
 
 export function AccommodationCard({ accommodation }: AccommodationCardProps) {
   return (
@@ -68,7 +61,7 @@ export function AccommodationCard({ accommodation }: AccommodationCardProps) {
         </p>
         <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1 text-xs text-gray-500">
           {accommodation.amenities.map((amenity) => {
-            const Icon = iconMap[amenity.icon] || Wifi;
+            const Icon = servicioIcons[amenity.icon] || Wifi;
             return (
               <span key={amenity.label} className="flex items-center gap-1">
                 <Icon className="w-3 h-3" />

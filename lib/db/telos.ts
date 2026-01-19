@@ -8,7 +8,11 @@ export async function getTelos() {
 
   const { data, error } = await supabase
     .from("telos")
-    .select("*")
+    .select(`
+      *,
+      distrito:distritos(id, nombre, slug),
+      servicios:telos_servicios(servicio:servicios(id, nombre, slug, foto))
+    `)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -16,7 +20,13 @@ export async function getTelos() {
     throw new Error("No se pudieron cargar los telos");
   }
 
-  return data as Telo[];
+  const formattedData = data?.map((telo) => ({
+    ...telo,
+    distrito: telo.distrito,
+    servicios: telo.servicios?.map((ts: { servicio: { id: string; nombre: string; slug: string; foto: string } }) => ts.servicio).filter(Boolean) || [],
+  }));
+
+  return formattedData as Telo[];
 }
 
 export const getTelosCached = unstable_cache(
@@ -35,7 +45,11 @@ export async function getTeloBySlug(slug: string) {
 
   const { data, error } = await supabase
     .from("telos")
-    .select("*")
+    .select(`
+      *,
+      distrito:distritos(id, nombre, slug),
+      servicios:telos_servicios(servicio:servicios(id, nombre, slug, foto))
+    `)
     .eq("slug", slug)
     .single();
 
@@ -44,7 +58,13 @@ export async function getTeloBySlug(slug: string) {
     return null;
   }
 
-  return data as Telo;
+  const formattedData = {
+    ...data,
+    distrito: data.distrito,
+    servicios: data.servicios?.map((ts: { servicio: { id: string; nombre: string; slug: string; foto: string } }) => ts.servicio).filter(Boolean) || [],
+  };
+
+  return formattedData as Telo;
 }
 
 export async function getTelosByDistrito(distritoId: string) {
@@ -52,7 +72,11 @@ export async function getTelosByDistrito(distritoId: string) {
 
   const { data, error } = await supabase
     .from("telos")
-    .select("*")
+    .select(`
+      *,
+      distrito:distritos(id, nombre, slug),
+      servicios:telos_servicios(servicio:servicios(id, nombre, slug, foto))
+    `)
     .eq("distrito_id", distritoId)
     .order("stars", { ascending: false, nullsFirst: false });
 
@@ -61,7 +85,13 @@ export async function getTelosByDistrito(distritoId: string) {
     return [];
   }
 
-  return data as Telo[];
+  const formattedData = data?.map((telo) => ({
+    ...telo,
+    distrito: telo.distrito,
+    servicios: telo.servicios?.map((ts: { servicio: { id: string; nombre: string; slug: string; foto: string } }) => ts.servicio).filter(Boolean) || [],
+  }));
+
+  return formattedData as Telo[];
 }
 
 export async function createTelo(

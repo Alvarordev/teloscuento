@@ -6,109 +6,96 @@ import { Button } from "@/components/ui/button";
 import { SearchBar } from "./search-bar";
 import { AccommodationCard, type Accommodation } from "./accommodation-card";
 import { useFilters } from "../hooks/use-filters";
-import { Telo, Distrito } from "@/types/database";
+import { Telo } from "@/types/database";
 
 interface AccommodationsGridProps {
   telos: Telo[];
-  distritos: Distrito[];
 }
 
-const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=2574&auto=format&fit=crop";
+const DEFAULT_IMAGE =
+  "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=2574&auto=format&fit=crop";
 
-export function AccommodationsGrid({ telos, distritos }: AccommodationsGridProps) {
+export function AccommodationsGrid({ telos }: AccommodationsGridProps) {
   const { filters } = useFilters();
 
-  // Map de distritos para búsqueda rápida
-  const distritosMap = useMemo(() => {
-    return distritos.reduce((acc, distrito) => {
-      acc[distrito.id] = distrito;
-      return acc;
-    }, {} as Record<string, Distrito>);
-  }, [distritos]);
-
-  // Convertir telos a Accommodation format
   const accommodations: Accommodation[] = useMemo(() => {
     return telos.map((telo) => {
-      const distrito = telo.distrito_id ? distritosMap[telo.distrito_id] : null;
-      
-      // Extraer precio del objeto precios
+      const distrito = telo.distrito?.nombre || "Lima";
+
       const precios = telo.precios || {};
       const firstPriceObj = Object.values(precios)[0];
-      
-      // Si el valor es un objeto con {tipo, precio}, extraer el precio
+
       let firstPrice = 0;
-      if (firstPriceObj && typeof firstPriceObj === 'object' && 'precio' in firstPriceObj) {
+      if (
+        firstPriceObj &&
+        typeof firstPriceObj === "object" &&
+        "precio" in firstPriceObj
+      ) {
         firstPrice = Number(firstPriceObj.precio) || 0;
-      } else if (typeof firstPriceObj === 'number') {
+      } else if (typeof firstPriceObj === "number") {
         firstPrice = firstPriceObj;
       }
-      
-      // Extraer primera imagen o usar default
-      const image = telo.fotos && telo.fotos.length > 0 ? telo.fotos[0] : DEFAULT_IMAGE;
+
+      const image =
+        telo.fotos && telo.fotos.length > 0 ? telo.fotos[0] : DEFAULT_IMAGE;
+
+      const amenities = (telo.servicios || []).map((servicio) => ({
+        icon: servicio.slug,
+        label: servicio.nombre,
+      }));
 
       return {
         id: telo.id,
         name: telo.nombre,
         image,
-        district: distrito?.nombre || "Lima",
+        district: distrito,
         city: "Lima",
         rating: telo.stars || 0,
         price: firstPrice,
-        hours: 3, // Default, podrías extraer esto de los turnos
-        amenities: [], // Por ahora vacío, se llenará cuando tengas la relación telos-servicios
+        hours: 3,
+        amenities,
       };
     });
-  }, [telos, distritosMap]);
+  }, [telos]);
 
   const filteredAccommodations = useMemo(() => {
     let result = [...accommodations];
 
-    // Filtro de búsqueda
     if (filters.search) {
       const searchLower = filters.search.toLowerCase();
       result = result.filter(
         (acc) =>
           acc.name.toLowerCase().includes(searchLower) ||
           acc.district.toLowerCase().includes(searchLower) ||
-          acc.city.toLowerCase().includes(searchLower)
+          acc.city.toLowerCase().includes(searchLower),
       );
     }
 
-    // Filtro de precio mínimo
     if (filters.minPrice !== undefined) {
       result = result.filter((acc) => acc.price >= filters.minPrice!);
     }
 
-    // Filtro de precio máximo
     if (filters.maxPrice !== undefined) {
       result = result.filter((acc) => acc.price <= filters.maxPrice!);
     }
 
-    // Filtro de distritos
     if (filters.districts.length > 0) {
       result = result.filter((acc) => {
-        // Buscar el distrito en el map original
-        const distritoMatch = Object.values(distritosMap).find(
-          (d) => d.nombre.toLowerCase() === acc.district.toLowerCase()
-        );
-        
-        if (!distritoMatch) return false;
-        
-        // Verificar si el slug del distrito está en los filtros
-        return filters.districts.includes(distritoMatch.slug);
+        const teloOriginal = telos.find((t) => t.id === acc.id);
+        if (!teloOriginal?.distrito) return false;
+
+        return filters.districts.includes(teloOriginal.distrito.slug);
       });
     }
 
-    // TODO: Filtro de amenities cuando esté la relación telos-servicios
-    // if (filters.amenities.length > 0) {
-    //   result = result.filter((acc) => {
-    //     return filters.amenities.some((amenity) =>
-    //       acc.amenities.some((a) => a.icon === amenity)
-    //     );
-    //   });
-    // }
+    if (filters.amenities.length > 0) {
+      result = result.filter((acc) => {
+        return filters.amenities.some((amenitySlug) =>
+          acc.amenities.some((a) => a.icon === amenitySlug),
+        );
+      });
+    }
 
-    // Ordenamiento
     switch (filters.sortBy) {
       case "price-asc":
         result.sort((a, b) => a.price - b.price);
@@ -124,14 +111,11 @@ export function AccommodationsGrid({ telos, distritos }: AccommodationsGridProps
     }
 
     return result;
-  }, [accommodations, filters, distritosMap]);
+  }, [accommodations, filters, telos]);
 
   return (
     <div className="flex-1">
-      <SearchBar
-        totalResults={filteredAccommodations.length}
-        location="Lima"
-      />
+      <SearchBar totalResults={filteredAccommodations.length} location="Lima" />
 
       {filteredAccommodations.length === 0 ? (
         <div className="text-center py-12">

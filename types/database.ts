@@ -27,4 +27,6 @@ export interface Telo {
   distrito_id: string | null;
   slug: string | null;
   stars: number | null;
+  distrito?: Distrito; 
+  servicios?: Servicio[];
 }
