@@ -57,7 +57,7 @@ export async function MostViewedSection() {
     <section className="py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Carousel
-          title="Los favoritos de Lima"
+          title="Alojamientos más vistos"
           subtitle="Alojamientos destacados por nuestra comunidad esta semana."
         >
           {accommodations.map((accommodation) => (

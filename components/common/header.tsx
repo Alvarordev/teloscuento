@@ -1,4 +1,5 @@
 import { Moon } from "lucide-react";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -15,18 +16,18 @@ export function Header() {
           </div>
 
           <nav className="hidden md:flex space-x-8 items-center font-semibold">
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-sm text-gray-900 hover:text-primary transition-colors"
             >
               Inicio
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/alojamientos"
               className="text-sm text-gray-500 hover:text-primary transition-colors"
             >
               Alojamientos
-            </a>
+            </Link>
             <a
               href="#"
               className="text-sm text-gray-500 hover:text-primary transition-colors"

@@ -7,9 +7,8 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight font-semibold text-gray-900 leading-[1.1] my-6">
-              Tu privacidad, <br />
-              <span className="text-primary">tus reglas,</span> tu momento.
+            <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight font-semibold text-foreground leading-[1.1] my-6">
+              Encuentra alojamientos transitorios  en Lima
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
               Encuentra y reserva habitaciones por horas en los mejores hoteles
@@ -19,7 +18,7 @@ export function HeroSection() {
             <div className="bg-white p-2 rounded-xl shadow-md border border-gray-200">
               <form className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-100">
                 <div className="flex-1 px-4 py-3 hover:bg-gray-50 transition-colors rounded-lg group cursor-pointer">
-                  <label className="block text-xs font-semibold text-gray-900 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-foreground uppercase tracking-wider mb-1">
                     Distrito
                   </label>
                   <div className="flex items-center gap-2">
@@ -36,7 +35,7 @@ export function HeroSection() {
                 </div>
 
                 <div className="flex-1 px-4 py-3 hover:bg-gray-50 transition-colors rounded-lg group cursor-pointer">
-                  <label className="block text-xs font-semibold text-gray-900 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-foreground uppercase tracking-wider mb-1">
                     Tipo
                   </label>
                   <div className="flex items-center gap-2">
