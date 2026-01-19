@@ -54,7 +54,7 @@ export function SearchBar({ totalResults, location }: SearchBarProps) {
   ];
 
   return (
-    <div className="sticky top-20 z-30 backdrop-blur py-2 mb-6">
+    <div className="sticky lg:static w-auto top-20 z-30 backdrop-blur py-2 mb-6 bg-background">
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-2 flex flex-col md:flex-row gap-4 items-center">
         <div className="relative flex-1 w-full">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

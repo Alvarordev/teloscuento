@@ -6,20 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFilters } from "../hooks/use-filters";
 import { useState } from "react";
-import { Servicio } from "@/types/database";
-
-const districts = [
-  { id: "lince", label: "Lince" },
-  { id: "miraflores", label: "Miraflores" },
-  { id: "barranco", label: "Barranco" },
-  { id: "los-olivos", label: "Los Olivos" },
-];
+import { Distrito, Servicio } from "@/types/database";
 
 interface FiltersSidebarProps {
   servicios: Servicio[];
+  distritos: Distrito[];
 }
 
-export function FiltersSidebar({ servicios }: FiltersSidebarProps) {
+export function FiltersSidebar({ servicios, distritos }: FiltersSidebarProps) {
   const {
     filters,
     updateFilters,
@@ -130,19 +124,19 @@ export function FiltersSidebar({ servicios }: FiltersSidebarProps) {
       <div className="border-t border-gray-100 pt-6">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Distritos</h3>
         <div className="space-y-3">
-          {districts.map((district) => (
+          {distritos.map((district) => (
             <label
               key={district.id}
               className="flex items-center gap-3 cursor-pointer group"
             >
               <Checkbox
                 id={district.id}
-                checked={filters.districts.includes(district.id)}
-                onCheckedChange={() => toggleDistrict(district.id)}
+                checked={filters.districts.includes(district.slug)}
+                onCheckedChange={() => toggleDistrict(district.slug)}
                 className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
               <span className="text-sm text-gray-600 group-hover:text-gray-900">
-                {district.label}
+                {district.nombre}
               </span>
             </label>
           ))}

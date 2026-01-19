@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Heart, Star, Wifi, Car, Tv, Coffee, Shield } from "lucide-react";
+import { Star, Wifi, Car, Tv, Coffee, Shield } from "lucide-react";
 
 export interface Accommodation {
   id: string;
@@ -29,16 +29,13 @@ const iconMap: Record<string, React.ElementType> = {
 
 export function AccommodationCard({ accommodation }: AccommodationCardProps) {
   return (
-    <article className="group relative flex flex-col gap-3 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <article className="group relative flex flex-col gap-3 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
       <div className="relative aspect-4/3 overflow-hidden rounded-t-2xl">
         <img
           src={accommodation.image}
           alt={accommodation.name}
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
         />
-        <button className="absolute top-3 right-3 p-2 rounded-full bg-white/60 hover:bg-white text-gray-700 backdrop-blur-sm transition-colors z-10">
-          <Heart className="w-4.5 h-4.5" strokeWidth={1.5} />
-        </button>
         {accommodation.tags && accommodation.tags.length > 0 && (
           <div className="absolute bottom-3 left-3 flex gap-2">
             {accommodation.tags.map((tag) => (
@@ -80,7 +77,7 @@ export function AccommodationCard({ accommodation }: AccommodationCardProps) {
             );
           })}
         </div>
-        <div className="mt-4 flex items-baseline gap-1 pt-3 border-t border-gray-100">
+        <div className="mt-4 lg:mt-0 flex items-baseline gap-1 pt-3 border-t border-gray-100">
           <span className="text-lg font-bold text-primary">
             S/ {accommodation.price}
           </span>
