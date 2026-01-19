@@ -37,12 +37,13 @@ export function FaqSection() {
           Preguntas Frecuentes
         </h2>
 
-        <Accordion type="single" collapsible className="space-y-4">
+        <Accordion type="single" collapsible className="space-y-4" defaultValue="item-0">
           {faqs.map((faq, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
               className="bg-white rounded-xl shadow-sm border border-gray-200 px-5"
+
             >
               <AccordionTrigger className="text-gray-900 hover:no-underline">
                 {faq.question}

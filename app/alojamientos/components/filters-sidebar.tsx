@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFilters } from "../hooks/use-filters";
 import { useState } from "react";
+import { Servicio } from "@/types/database";
 
 const districts = [
   { id: "lince", label: "Lince" },
@@ -14,14 +15,11 @@ const districts = [
   { id: "los-olivos", label: "Los Olivos" },
 ];
 
-const amenities = [
-  { id: "jacuzzi", label: "Jacuzzi" },
-  { id: "cochera", label: "Cochera Privada" },
-  { id: "sauna", label: "Sauna" },
-  { id: "smart-tv", label: "Smart TV" },
-];
+interface FiltersSidebarProps {
+  servicios: Servicio[];
+}
 
-export function FiltersSidebar() {
+export function FiltersSidebar({ servicios }: FiltersSidebarProps) {
   const {
     filters,
     updateFilters,
@@ -154,19 +152,19 @@ export function FiltersSidebar() {
       <div className="border-t border-gray-100 pt-6">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Comodidades</h3>
         <div className="space-y-3">
-          {amenities.map((amenity) => (
+          {servicios.map((servicio) => (
             <label
-              key={amenity.id}
+              key={servicio.id}
               className="flex items-center gap-3 cursor-pointer group"
             >
               <Checkbox
-                id={amenity.id}
-                checked={filters.amenities.includes(amenity.id)}
-                onCheckedChange={() => toggleAmenity(amenity.id)}
+                id={servicio.slug}
+                checked={filters.amenities.includes(servicio.slug)}
+                onCheckedChange={() => toggleAmenity(servicio.slug)}
                 className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
               <span className="text-sm text-gray-600 group-hover:text-gray-900">
-                {amenity.label}
+                {servicio.nombre}
               </span>
             </label>
           ))}

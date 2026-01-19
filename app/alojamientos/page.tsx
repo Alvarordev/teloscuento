@@ -3,6 +3,7 @@ import { FiltersSidebar } from "./components/filters-sidebar";
 import { AccommodationsGrid } from "./components/accommodations-grid";
 import { type Accommodation } from "./components/accommodation-card";
 import { Suspense } from "react";
+import { getServicios } from "@/lib/db/servicios";
 
 const accommodations: Accommodation[] = [
   {
@@ -102,14 +103,16 @@ const breadcrumbItems = [
   { label: "Alojamientos" },
 ];
 
-export default function AlojamientosPage() {
+export default async function AlojamientosPage() {
+  const servicios = await getServicios();
+
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
       <Breadcrumbs items={breadcrumbItems} />
 
       <Suspense fallback={<div>Cargando...</div>}>
         <div className="lg:grid lg:grid-cols-[280px_1fr] gap-10">
-          <FiltersSidebar />
+          <FiltersSidebar servicios={servicios} />
           <AccommodationsGrid accommodations={accommodations} />
         </div>
       </Suspense>

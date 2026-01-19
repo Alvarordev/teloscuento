@@ -1,34 +1,11 @@
-import { Waves, Car, Tv, Utensils, ThermometerSun } from "lucide-react";
+import { getServicioIcon } from "@/lib/servicio-icons";
+import { Servicio } from "@/types/database";
 
-export function AmenitiesSection() {
-  const amenities = [
-    {
-      name: "Jacuzzi",
-      icon: Waves,
-      href: "#",
-    },
-    {
-      name: "Cochera Privada",
-      icon: Car,
-      href: "#",
-    },
-    {
-      name: "Smart TV + Netflix",
-      icon: Tv,
-      href: "#",
-    },
-    {
-      name: "Room Service",
-      icon: Utensils,
-      href: "#",
-    },
-    {
-      name: "Sauna",
-      icon: ThermometerSun,
-      href: "#",
-    },
-  ];
+interface AmenitiesSectionProps {
+  servicios: Servicio[];
+}
 
+export function AmenitiesSection({ servicios }: AmenitiesSectionProps) {
   return (
     <section className="pt-16 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,16 +13,16 @@ export function AmenitiesSection() {
           Busca por comodidades
         </h2>
         <div className="flex flex-wrap gap-3">
-          {amenities.map((amenity) => {
-            const Icon = amenity.icon;
+          {servicios.map((servicio) => {
+            const Icon = getServicioIcon(servicio.slug);
             return (
               <a
-                key={amenity.name}
-                href={amenity.href}
+                key={servicio.id}
+                href={`/alojamientos?amenities=${servicio.slug}`}
                 className="flex items-center gap-2 px-5 py-3 rounded-lg border border-gray-200 bg-white hover:border-primary hover:text-primary transition-all shadow-sm"
               >
-                <Icon className="w-4.5 h-4.5" />
-                <span className="text-sm font-medium">{amenity.name}</span>
+                {Icon && <Icon className="w-4.5 h-4.5" />}
+                <span className="text-sm font-medium">{servicio.nombre}</span>
               </a>
             );
           })}
