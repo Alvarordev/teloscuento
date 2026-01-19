@@ -46,6 +46,7 @@ export function AccommodationsGrid({ telos }: AccommodationsGridProps) {
 
       return {
         id: telo.id,
+        slug: telo.slug,
         name: telo.nombre,
         image,
         district: distrito,
