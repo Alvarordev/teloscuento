@@ -26,7 +26,7 @@ export default async function AlojamientosPage() {
       <Suspense fallback={<div>Cargando...</div>}>
         <div className="lg:grid lg:grid-cols-[280px_1fr] gap-10">
           <FiltersSidebar servicios={servicios} distritos={distritos} />
-          <AccommodationsGrid telos={telos} />
+          <AccommodationsGrid telos={telos} servicios={servicios} distritos={distritos} />
         </div>
       </Suspense>
     </main>

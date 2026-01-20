@@ -1,14 +1,14 @@
 import { Precio, Turno } from "@/types/database";
 
-interface TeloRatesProps {
+interface CostAsideProps {
   turnos: Turno[] | null;
   precios: Precio[] | null;
 }
 
-export function TeloRates({ turnos, precios }: TeloRatesProps) {
+export function CostAside({ turnos, precios }: CostAsideProps) {
   return (
-    <div className="lg:hidden">
-      <div className="bg-background border border-gray-200 rounded-2xl p-6 shadow-sm">
+    <div className="hidden lg:block">
+      <div className="sticky top-28 bg-background border border-gray-200 rounded-2xl p-6 shadow-lg shadow-gray-200/50">
         {turnos && turnos.length > 0 && (
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-foreground mb-4">

@@ -8,7 +8,7 @@ interface DistrictsSectionProps {
 
 export function DistrictsSection({ distritos }: DistrictsSectionProps) {
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Carousel title="Explora por distrito">
           {distritos.map((distrito) => (

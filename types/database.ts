@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Servicio {
   id: string;
   nombre: string;
@@ -19,8 +18,8 @@ export interface Telo {
   id: string;
   nombre: string;
   descripcion: string | null;
-  precios: Record<string, any> | null;
-  turnos: Record<string, any> | null;
+  precios: Precio[] | null;
+  turnos: Turno[] | null;
   ubicacion: string | null;
   fotos: string[] | null;
   created_at: string;
@@ -29,4 +28,14 @@ export interface Telo {
   stars: number | null;
   distrito?: Distrito; 
   servicios?: Servicio[];
+}
+
+export interface Turno {
+  descripcion: string;
+  duracion_horas: number;
+}
+
+export interface Precio {
+  tipo: string;
+  precio: number;
 }

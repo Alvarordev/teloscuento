@@ -7,7 +7,7 @@ import { TeloDescription } from "./components/telo-description";
 import { TeloAmenities } from "./components/telo-amenities";
 import { TeloRates } from "./components/telo-rates";
 import { TeloLocation } from "./components/telo-location";
-import { BookingCard } from "./components/booking-card";
+import { CostAside } from "./components/cost-aside";
 import { Recommendations } from "./components/recommendations";
 
 interface TeloPageProps {
@@ -34,7 +34,7 @@ export default async function TeloPage({ params }: TeloPageProps) {
 
   const breadcrumbItems = [
     { label: "Inicio", href: "/" },
-    { label: "Lima", href: "/alojamientos" },
+    { label: "Alojamientos", href: "/alojamientos" },
     {
       label: telo.distrito?.nombre || distrito,
       href: `/alojamientos?districts=${distrito}`,
@@ -53,17 +53,17 @@ export default async function TeloPage({ params }: TeloPageProps) {
         distrito={telo.distrito?.nombre}
       />
 
-      <div className="mb-10">
+      <div className="mb-4 lg:mb-10">
         <ImageCarousel images={telo.fotos || []} alt={telo.nombre} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12">
-        <div className="space-y-10">
+        <div className="space-y-4 lg:space-y-10">
           <TeloDescription nombre={telo.nombre} descripcion={telo.descripcion} />
 
-          <TeloAmenities servicios={telo.servicios || []} />
+          <TeloRates turnos={telo.turnos} precios={telo.precios} />
 
-          <TeloRates turnos={telo.turnos} />
+          <TeloAmenities servicios={telo.servicios || []} />
 
           <TeloLocation
             ubicacion={telo.ubicacion}
@@ -71,9 +71,9 @@ export default async function TeloPage({ params }: TeloPageProps) {
           />
         </div>
 
-        <BookingCard
-          stars={telo.stars}
+        <CostAside
           turnos={telo.turnos}
+          precios={telo.precios}
         />
       </div>
 

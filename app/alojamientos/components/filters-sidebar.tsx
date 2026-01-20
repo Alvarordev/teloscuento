@@ -57,7 +57,7 @@ export function FiltersSidebar({ servicios, distritos }: FiltersSidebarProps) {
   };
 
   return (
-    <aside className="hidden lg:block space-y-8 sticky top-24 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-10">
+    <aside className="hidden lg:block space-y-8 sticky top-24 h-fit">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold tracking-tight text-gray-900">
           Filtros
@@ -70,7 +70,7 @@ export function FiltersSidebar({ servicios, distritos }: FiltersSidebarProps) {
         </button>
       </div>
 
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-gray-100 pt-6 overflow-hidden">
         <h3 className="text-sm font-medium text-gray-900 mb-4">
           Rango de Precio (S/)
         </h3>
@@ -121,9 +121,9 @@ export function FiltersSidebar({ servicios, distritos }: FiltersSidebarProps) {
         </div>
       </div>
 
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-gray-100 pt-6 overflow-hidden">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Distritos</h3>
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
           {distritos.map((district) => (
             <label
               key={district.id}
@@ -143,9 +143,9 @@ export function FiltersSidebar({ servicios, distritos }: FiltersSidebarProps) {
         </div>
       </div>
 
-      <div className="border-t border-gray-100 pt-6">
+      <div className="border-t border-gray-100 pt-6 overflow-hidden">
         <h3 className="text-sm font-medium text-gray-900 mb-4">Comodidades</h3>
-        <div className="space-y-3">
+        <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
           {servicios.map((servicio) => (
             <label
               key={servicio.id}

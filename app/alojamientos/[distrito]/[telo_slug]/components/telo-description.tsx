@@ -8,10 +8,10 @@ export function TeloDescription({ nombre, descripcion }: TeloDescriptionProps) {
 
   return (
     <section className="border-b border-gray-100 pb-8">
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">
+      <h2 className="text-base lg:text-xl font-semibold text-gray-900 mb-2 lg:mb-4">
         Sobre este alojamiento
       </h2>
-      <div className="prose prose-sm prose-gray max-w-none text-gray-600 leading-relaxed">
+      <div className="text-sm max-w-none text-gray-600 leading-relaxed">
         <p>{descripcion || defaultDescription}</p>
       </div>
     </section>

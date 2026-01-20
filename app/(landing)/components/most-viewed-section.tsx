@@ -1,58 +1,12 @@
 import { AccommodationCard } from "./accommodation-card";
 import { Carousel } from "./carousel";
+import { Telo } from "@/types/database";
 
-async function getMostViewedAccommodations() {
-  return [
-    {
-      id: 1,
-      name: "Hotel Suites Blue",
-      location: "Lince, Lima",
-      price: 50,
-      hours: 6,
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2670&auto=format&fit=crop",
-      badge: undefined,
-    },
-    {
-      id: 2,
-      name: "Astoria Plaza",
-      location: "San Isidro, Lima",
-      price: 90,
-      hours: 6,
-      rating: 4.8,
-      image:
-        "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2670&auto=format&fit=crop",
-      badge: "Sillón Tántrico",
-    },
-    {
-      id: 3,
-      name: "Wimbledon Hotel",
-      location: "San Miguel, Lima",
-      price: 75,
-      hours: 4,
-      rating: 4.5,
-      image:
-        "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=2574&auto=format&fit=crop",
-      badge: undefined,
-    },
-    {
-      id: 4,
-      name: "Hostal Los Pinos",
-      location: "Miraflores, Lima",
-      price: 40,
-      hours: 3,
-      rating: 4.2,
-      image:
-        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2670&auto=format&fit=crop",
-      badge: undefined,
-    },
-  ];
+interface MostViewedSectionProps {
+  telos: Telo[];
 }
 
-export async function MostViewedSection() {
-  const accommodations = await getMostViewedAccommodations();
-
+export function MostViewedSection({ telos }: MostViewedSectionProps) {
   return (
     <section className="py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,8 +14,8 @@ export async function MostViewedSection() {
           title="Alojamientos más vistos"
           subtitle="Alojamientos destacados por nuestra comunidad esta semana."
         >
-          {accommodations.map((accommodation) => (
-            <AccommodationCard key={accommodation.id} {...accommodation} />
+          {telos.map((telo) => (
+            <AccommodationCard key={telo.id} telo={telo} />
           ))}
         </Carousel>
       </div>

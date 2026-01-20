@@ -6,16 +6,18 @@ import { Button } from "@/components/ui/button";
 import { SearchBar } from "./search-bar";
 import { AccommodationCard, type Accommodation } from "./accommodation-card";
 import { useFilters } from "../hooks/use-filters";
-import { Telo } from "@/types/database";
+import { Telo, Servicio, Distrito } from "@/types/database";
 
 interface AccommodationsGridProps {
   telos: Telo[];
+  servicios: Servicio[];
+  distritos: Distrito[];
 }
 
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=2574&auto=format&fit=crop";
 
-export function AccommodationsGrid({ telos }: AccommodationsGridProps) {
+export function AccommodationsGrid({ telos, servicios, distritos }: AccommodationsGridProps) {
   const { filters } = useFilters();
 
   const accommodations: Accommodation[] = useMemo(() => {
@@ -116,7 +118,12 @@ export function AccommodationsGrid({ telos }: AccommodationsGridProps) {
 
   return (
     <div className="flex-1">
-      <SearchBar totalResults={filteredAccommodations.length} location="Lima" />
+      <SearchBar 
+        totalResults={filteredAccommodations.length} 
+        location="Lima" 
+        servicios={servicios}
+        distritos={distritos}
+      />
 
       {filteredAccommodations.length === 0 ? (
         <div className="text-center py-12">
