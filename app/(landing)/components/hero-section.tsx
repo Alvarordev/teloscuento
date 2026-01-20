@@ -43,14 +43,14 @@ export function HeroSection({ distritos }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-24 overflow-hidden">
+    <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-24 overflow-hidden bg-gray-900 text-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight font-semibold text-foreground leading-[1.1] my-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight font-semibold leading-[1.1] my-6">
               Encuentra alojamientos transitorios en Lima
             </h1>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg">
               Encuentra y reserva habitaciones por horas en los mejores hoteles
               de Lima. Sin complicaciones, discreto y seguro.
             </p>
@@ -138,9 +138,9 @@ export function HeroSection({ distritos }: HeroSectionProps) {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-4 text-sm text-gray-500">
+            <div className="mt-6 flex items-center gap-4 text-sm text-gray-400">
               <span>Tendencias:</span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 text-foreground">
                 <Button
                   variant="outline"
                   size="sm"
