@@ -15,10 +15,10 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex space-x-8 items-center font-semibold">
+          <nav className="flex space-x-8 items-center font-semibold">
             <Link
               href="/"
-              className="text-sm text-gray-900 hover:text-primary transition-colors"
+              className="text-sm text-gray-900 hover:text-primary transition-colors hidden md:block"
             >
               Inicio
             </Link>
@@ -28,18 +28,6 @@ export function Header() {
             >
               Alojamientos
             </Link>
-            <a
-              href="#"
-              className="text-sm text-gray-500 hover:text-primary transition-colors"
-            >
-              Distritos
-            </a>
-            <a
-              href="#"
-              className="text-sm text-gray-500 hover:text-primary transition-colors"
-            >
-              Comodidades
-            </a>
           </nav>
         </div>
       </div>

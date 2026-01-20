@@ -2,24 +2,24 @@ import { Moon } from "lucide-react";
 
 export function Footer() {
   const locations = [
-    { name: "Miraflores", href: "#" },
-    { name: "San Isidro", href: "#" },
-    { name: "Barranco", href: "#" },
-    { name: "La Molina", href: "#" },
+    { name: "Miraflores", href: "/alojamientos?districts=miraflores" },
+    { name: "San Isidro", href: "/alojamientos?districts=san-isidro" },
+    { name: "Lince", href: "/alojamientos?districts=lince" },
+    { name: "Los Olivos", href: "/alojamientos?districts=los-olivos" },
   ];
 
   const popular = [
-    { name: "Con Jacuzzi", href: "#" },
-    { name: "Con Piscina", href: "#" },
-    { name: "Suites Ejecutivas", href: "#" },
-    { name: "Habitaciones Temáticas", href: "#" },
+    { name: "Con Jacuzzi", href: "/alojamientos?amenities=jacuzzi" },
+    { name: "Con Tragos", href: "/alojamientos?amenities=tragos" },
+    { name: "Lince", href: "/alojamientos?districts=lince" },
+    { name: "San Miguel", href: "/alojamientos?districts=san-miguel" },
   ];
 
   const amenities = [
-    { name: "WiFi Gratis", href: "#" },
-    { name: "Estacionamiento", href: "#" },
-    { name: "Desayuno Incluido", href: "#" },
-    { name: "Servicio a la Habitación", href: "#" },
+    { name: "WiFi Gratis", href: "/alojamientos?amenities=wifi-gratis" },
+    { name: "Cochera", href: "/alojamientos?amenities=cochera" },
+    { name: "Jacuzzi", href: "/alojamientos?amenities=jacuzzi" },
+    { name: "Sauna", href: "/alojamientos?amenities=sauna" },
   ];
 
   return (
