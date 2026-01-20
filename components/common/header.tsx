@@ -1,4 +1,4 @@
-import { Moon } from "lucide-react";
+import { MoonStar } from "lucide-react";
 import Link from "next/link";
 
 export function Header() {
@@ -8,7 +8,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16 md:h-20">
           <Link href="/" className="shrink-0 flex items-center gap-2 cursor-pointer">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
-              <Moon className="h-5 w-5" />
+              <MoonStar className="h-5 w-5" />
             </div>
             <span className="text-lg md:text-xl tracking-tight font-semibold text-gray-900">
               TelosCuento

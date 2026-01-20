@@ -1,4 +1,4 @@
-import { Moon } from "lucide-react";
+import { MoonStar } from "lucide-react";
 
 export function Footer() {
   const locations = [
@@ -29,7 +29,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white">
-                <Moon className="h-5 w-5" />
+                <MoonStar className="h-5 w-5" />
               </div>
               <span className="text-lg font-semibold text-white">
                 TelosCuento
