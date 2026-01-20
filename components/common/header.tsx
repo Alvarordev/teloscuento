@@ -15,16 +15,16 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="flex space-x-8 items-center font-semibold">
+          <nav className="flex space-x-8 items-center font-semibold text-base">
             <Link
               href="/"
-              className="text-sm text-foreground hover:text-primary transition-colors hidden md:block"
+              className="text-foreground hover:text-primary transition-colors hidden md:block"
             >
               Inicio
             </Link>
             <Link
               href="/alojamientos"
-              className="text-sm text-foreground hover:text-primary transition-colors"
+              className="text-foreground hover:text-primary transition-colors"
             >
               Alojamientos
             </Link>

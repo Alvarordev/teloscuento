@@ -9,12 +9,57 @@ import { TeloRates } from "./components/telo-rates";
 import { TeloLocation } from "./components/telo-location";
 import { CostAside } from "./components/cost-aside";
 import { Recommendations } from "./components/recommendations";
+import { Metadata } from "next";
 
 interface TeloPageProps {
   params: Promise<{
     distrito: string;
     telo_slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: TeloPageProps): Promise<Metadata> {
+  const { telo_slug } = await params;
+  const telo = await getTeloBySlug(telo_slug);
+
+  if (!telo) {
+    return {
+      title: "Alojamiento no encontrado",
+    };
+  }
+
+  const distrito = telo.distrito?.nombre || "Lima";
+
+  const description = telo.descripcion
+    ? telo.descripcion.slice(0, 160)
+    : `${telo.nombre} -  Privacidad y comodidad garantizada.`;
+
+  return {
+    title: `${telo.nombre} - Hoteles en ${distrito}`,
+    description,
+    keywords: [
+      telo.nombre,
+      `telo en ${distrito}`,
+      `hotel por horas ${distrito}`,
+      "alojamiento por horas Lima",
+      distrito,
+      ...(telo.servicios?.map((s) => s.nombre) || []),
+    ],
+    openGraph: {
+      title: `${telo.nombre} - Hoteles en ${distrito}`,
+      description,
+      images: telo.fotos && telo.fotos.length > 0 ? [telo.fotos[0]] : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${telo.nombre} - Hoteles en ${distrito}`,
+      description,
+      images: telo.fotos && telo.fotos.length > 0 ? [telo.fotos[0]] : [],
+    },
+  };
 }
 
 export default async function TeloPage({ params }: TeloPageProps) {
